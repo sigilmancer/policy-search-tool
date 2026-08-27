@@ -1,0 +1,11 @@
+[SECTION: HOUSING]
+Hammersmith requires 35% affordable housing for buildings over four stories.
+
+[SECTION: TRANSPORT]
+Clean air zones restrict diesel vehicles over 3.5 tonnes at night.
+
+[SECTION: HOUSING]
+Cotswolds requires 55% affordable housing for buildings over four stories.
+
+[SECTION: FLOODS]
+Bridgewater requires 23% funding for flood risk areas.

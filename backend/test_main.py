@@ -1,7 +1,7 @@
 import pytest
 import os
 from httpx import AsyncClient, ASGITransport 
-from backend.main import app
+from main import app
 
 @pytest.fixture(autouse=True)
 def setup_test_data():

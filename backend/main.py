@@ -53,3 +53,5 @@ async def handle_query(request: QueryRequest):
         "answer": mock_ai_synthesis,
         "sources_found": len(relevant_context.split("[SECTION:")) - 1 if "SECTION" in relevant_context else 0
     }
+
+# Triggering backend test runner

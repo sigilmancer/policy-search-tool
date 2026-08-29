@@ -1,0 +1,56 @@
+name: Backend CI(Python and FastAPI)
+
+on: 
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+  
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/**'
+  
+  workflow_dispatch:
+
+
+permissions:
+  contents: read
+  issues: write
+
+jobs: 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout Repo
+      uses: actions/checkout@v4
+
+    - name: set up python runtime
+      uses: actions/setup-python@v5
+      with: 
+        python-version: '3.11'
+
+    - name: install system and project dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install pytest httpx
+      
+    - name: execute asynchronous integration tests
+      run: |
+        cd backend
+        python -m pytest -v
+
+    - name: file tracking ticket on failure
+      if: failure()
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      run: |
+        gh issue create \
+          --title "backend CI failure on []" \
+          --assignee "${{ github.actor }}" \
+          --label "bug" \
+          --body "Backend RAG pipeline integration tests failed on branch \`${{github.ref_name}}\` Inspect repo Actions log tab to isolate and repair failing assertion."
+      

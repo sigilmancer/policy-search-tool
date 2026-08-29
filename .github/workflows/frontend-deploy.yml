@@ -1,4 +1,4 @@
-name: Deploy frontend tp github pages
+name: Deploy frontend to github pages
 on:
   push:
     branches: [main]

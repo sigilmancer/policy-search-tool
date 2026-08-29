@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: checkout Repository
         uses: actions/checkout@v4
+
+      - name: setup GitHub pages configure
+        uses: actions/configure-pages@v5
       
       - name: setup node.js runtime
         uses: actions/setup-node@v4

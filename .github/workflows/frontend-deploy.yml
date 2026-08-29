@@ -11,18 +11,17 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deploment.outputs.page_url }}
+
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: checkout Repository
         uses: actions/checkout@v4
-
-      - name: setup GitHub pages configure
-        uses: actions/configure-pages@v5
       
       - name: setup node.js runtime
         uses: actions/setup-node@v4
@@ -32,18 +31,27 @@ jobs:
       - name: install monorepo folder dependencies
         run: |
           cd frontend
-          npm ci
+          npm install
       
       - name: compile static astro application
         run: |
           cd frontend
-          npm run build
+          npx astro build --root .
 
       - name: package and upload web artifacts
         uses: actions/upload-pages-artifact@v3
         with: 
           path: ./frontend/dist
-        
-      - name: deploy to GitHub pages
+  deploy:
+    needs: build
+    permissions: 
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: publish live to github pages
         id: deployment
-        uses: actions/configure-pages@v5
+        uses: actions/deploy-pages@v4

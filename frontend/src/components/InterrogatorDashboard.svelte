@@ -4,7 +4,8 @@
   let isLoading = false;
   let errorMessage = '';
   let copied = false;
-
+  const API_BASE = import.meta.env.PUBLIC_API_URL || 'http://127.0.0.1:8000';
+  
   async function submitQuery() {
     if (!queryText.trim()) return;
     
@@ -13,7 +14,7 @@
     responseData = null;
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/query', {
+      const response = await fetch(`${API_BASE}/api/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: queryText })

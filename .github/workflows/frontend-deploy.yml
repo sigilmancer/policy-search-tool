@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'frontend/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,10 +21,25 @@ jobs:
       - name: checkout Repository
         uses: actions/checkout@v4
       
-      - name: install, build, and upload Astro
-        uses: withastro/action@v3
+      - name: setup node.js runtime
+        uses: actions/setup-node@v4
         with:
-          path: ./frontend
+          node-version: 20
+      
+      - name: install monorepo folder dependencies
+        run: |
+          cd frontend
+          npm ci
+      
+      - name: compile static astro application
+        run: |
+          cd frontend
+          npm run build
+
+      - name: package and upload web artifacts
+        uses: actions/upload-pages-artifact@v3
+        with: 
+          path: ./frontend/dist
         
       - name: deploy to GitHub pages
         id: deployment

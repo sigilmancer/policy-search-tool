@@ -1,6 +1,6 @@
 # Policy Search Tool — Full-Stack Asynchronous RAG Monorepo
 
-[![Frontend Deployment](https://github.com)](https://github.com/sigilmancer/policy-search-tool/tree/main/frontend)
+[![Frontend Deployment](https://github.com)](https://github.com/sigilmancer/policy-search-tool/tree/main/frontend)  
 [![Backend CI](https://github.com)](https://github.com/sigilmancer/policy-search-tool/tree/main/backend)
 
 A full-stack RAG (Retrieval-Augmented Generation) tool built to parse, index, and query policies. 

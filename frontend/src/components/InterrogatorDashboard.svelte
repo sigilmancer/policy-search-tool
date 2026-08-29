@@ -5,7 +5,7 @@
   let errorMessage = '';
   let copied = false;
   const API_BASE = import.meta.env.PUBLIC_API_URL || 'http://127.0.0.1:8000';
-  
+
   async function submitQuery() {
     if (!queryText.trim()) return;
     
@@ -47,7 +47,7 @@
       <input
         type="text"
         bind:value={queryText}
-        placeholder="Interrogate public policy archives (e.g., Hammersmith housing)..."
+        placeholder="Search public policy archives (e.g., Housing, Floods, Transport)..."
         disabled={isLoading}
         aria-label="Policy Query"
       />
@@ -65,7 +65,7 @@
 
   {#if errorMessage}
     <div class="state-card error-card">
-      <div class="icon">⚠️</div>
+      <div class="icon">⚠︎</div>
       <div class="content">
         <h4>Pipeline Resolution Failure</h4>
         <p>{errorMessage}</p>
